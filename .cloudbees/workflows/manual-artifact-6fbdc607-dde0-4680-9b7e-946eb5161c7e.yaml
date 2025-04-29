@@ -31,5 +31,4 @@ jobs:
         shell: sh
         run: |
           echo "CB_VERSION: ${{cloudbees.version}}"
-    needs:
-      - auto_reg_artifacts
+   
