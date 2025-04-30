@@ -1,10 +1,13 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
 name: My workflow from Branch 1
-
 on:
   workflow_dispatch:
-
+    inputs:
+      testkey1:
+        type: string
+      testkey2:
+        type: string
 jobs:
   build:
     steps:
