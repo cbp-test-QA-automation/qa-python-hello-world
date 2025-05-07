@@ -3,7 +3,7 @@ kind: workflow
 name: My workflow
 on:
   workflow_dispatch:
-    
+
 jobs:
   build:
     steps:
@@ -13,6 +13,6 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
       - run: |
-          wget --spider http://localhost:3000
+            ls
         uses: docker://thanandock/solar-system:1.2
         shell: sh
