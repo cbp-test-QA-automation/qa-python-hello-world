@@ -19,7 +19,7 @@ jobs:
       - uses: cloudbees-io/kaniko/.cloudbees/testing
         name: Push image to OCI registry
         with:
-          destination: index.docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:${{cloudbees.version}}
+          destination: index.docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:0.0.3168
           labels: app=cbp
 
   manual_reg_artifacts:
@@ -28,15 +28,15 @@ jobs:
         uses: cloudbees-io/register-build-artifact@v1
         with:
           name: ${{ vars.DOCKER_USERNAME }}/python-hello-world-docker
-          version: ${{cloudbees.version}}
-          url: docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:${{cloudbees.version}}
+          version: 0.0.3168
+          url: docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:0.0.3168
           digest: sha256:102f6f3d863fcd801815e527be029cb191059416616f3581b55e20585f4a7dec
 
       - name: success_valid_env_reg_artifact
         uses: cloudbees-io/register-deployed-artifact@v1
         with:
-          version: ${{cloudbees.version}}
-          url: docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:${{cloudbees.version}}
+          version: 0.0.3168
+          url: docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:0.0.3168
           digest: sha256:102f6f3d863fcd801815e527be029cb191059416616f3581b55e20585f4a7dec
           target-environment: "QA"
           name: ${{ vars.DOCKER_USERNAME }}/python-hello-world-docker
