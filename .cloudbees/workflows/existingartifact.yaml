@@ -12,14 +12,14 @@ jobs:
         uses: cloudbees-io/register-build-artifact@v1
         with:
           name: ${{ vars.DOCKER_USERNAME }}/python-hello-world-docker
-          version: 0.0.3168
+          version: ${{cloudbees.version}}
           url: docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:0.0.3168
           digest: sha256:8362f50c663a44142d30f5d23d26831491bb0c9227e5c5e63ace49f30c365694
 
       - name: success_valid_env_reg_artifact
         uses: cloudbees-io/register-deployed-artifact@v1
         with:
-          version: 0.0.3168
+          version: ${{cloudbees.version}}
           url: docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:0.0.3168
           digest: sha256:8362f50c663a44142d30f5d23d26831491bb0c9227e5c5e63ace49f30c365694
           target-environment: "QA"
