@@ -5,22 +5,6 @@ name: RegisterDeployedArtifact
 on:
   workflow_dispatch:
 jobs:
-  auto_reg_artifacts:
-    steps:
-      - uses: cloudbees-io/checkout@v1
-        name: checkout
-      - uses: cloudbees-io/configure-oci-credentials@v1
-        name: Set up Docker Hub registry
-        kind: deploy
-        with:
-          registry: https://index.docker.io/v1/
-          username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - uses: cloudbees-io/kaniko/.cloudbees/testing
-        name: Push image to OCI registry
-        with:
-          destination: index.docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:0.0.3168
-          labels: app=cbp
 
   manual_reg_artifacts:
     steps:
@@ -30,14 +14,14 @@ jobs:
           name: ${{ vars.DOCKER_USERNAME }}/python-hello-world-docker
           version: 0.0.3168
           url: docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:0.0.3168
-          digest: sha256:102f6f3d863fcd801815e527be029cb191059416616f3581b55e20585f4a7dec
+          digest: sha256:8362f50c663a44142d30f5d23d26831491bb0c9227e5c5e63ace49f30c365694
 
       - name: success_valid_env_reg_artifact
         uses: cloudbees-io/register-deployed-artifact@v1
         with:
           version: 0.0.3168
           url: docker.io/${{ vars.DOCKER_USERNAME }}/python-hello-world-docker:0.0.3168
-          digest: sha256:102f6f3d863fcd801815e527be029cb191059416616f3581b55e20585f4a7dec
+          digest: sha256:8362f50c663a44142d30f5d23d26831491bb0c9227e5c5e63ace49f30c365694
           target-environment: "QA"
           name: ${{ vars.DOCKER_USERNAME }}/python-hello-world-docker
           
@@ -46,5 +30,3 @@ jobs:
         shell: sh
         run: |
           echo "CB_VERSION: ${{cloudbees.version}}"
-    needs:
-      - auto_reg_artifacts
